@@ -5,11 +5,12 @@ var app = connect();
 // require request-ip and register it as middleware
 var requestIp = require('request-ip');
 app.use(requestIp.mw())
-
+let allIPs = '';
 app.use(function(req, res) {
     // by default, the ip address will be set on the `clientIp` attribute
     var ip = req.clientIp;
-    res.end(ip + '\n');
+    allIPs += '\n' + ip + ' ' + new Date();
+    res.end(allIPs + '\n');
 });
 
 //create node.js http server and listen on port
